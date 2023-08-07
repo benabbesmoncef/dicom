@@ -1,0 +1,76 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+<br>
+<p *ngIf="detaitUser">Bienvenue  : {{ detaitUser.last_name }} {{ detaitUser.first_name }}
+  en espace {{ this.role }}
+</p>
+<form [formGroup]="form" >
+  <!--<button mat-raised-button color="accent" (click)="openDialog('Add',{})"> Ajouter Examan </button>-->
+  <button mat-button (click)="openDialog('Ajouter',{})" mat-flat-button color="accent">Ajouter Examan</button>
+
+
+  <!--  <input type="file" ng2FileSelect [uploader]="uploader" multiple accept="application/dicom" enctype="multipart/form-data"/>
+    <button (click)="upload()">Upload files</button>
+
+    <h2>Your files: {{ uploader?.queue?.length }}</h2>
+    <ul>
+      <li *ngFor="let item of uploader.queue">
+        {{ item?.file?.name }}
+      </li>
+    </ul>
+    <br>-->
+</form>
+<table mat-table [dataSource]="examList" #mytable class="my-table mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.pk}} </td>
+  </ng-container>
+  <!-- Patient Column -->
+  <!--   <ng-container matColumnDef="patient">
+       <th mat-header-cell *matHeaderCellDef> ID Patient </th>
+       <td mat-cell *matCellDef="let element"> {{element.patient_id}} </td>
+     </ng-container>-->
+  <!-- Type Column -->
+  <ng-container matColumnDef="examen_type">
+    <th mat-header-cell *matHeaderCellDef> Type d'examen </th>
+    <td mat-cell *matCellDef="let element"> {{element.examen_type}} </td>
+  </ng-container>
+
+
+
+  <!-- Medecin Column -->
+  <ng-container matColumnDef="medecin">
+    <th mat-header-cell *matHeaderCellDef> Medecin </th>
+    <td mat-cell *matCellDef="let element"> {{element.medecin_obj['first_name']}} {{element.medecin_obj['last_name']}} </td>
+  </ng-container>
+
+
+
+  <!-- examen_compte_rendu Column -->
+  <ng-container matColumnDef="examen_compte_rendu">
+    <th mat-header-cell *matHeaderCellDef> Compte Rendu </th>
+    <td mat-cell *matCellDef="let element"> {{element.examen_compte_rendu}} </td>
+  </ng-container>
+
+  <!-- Files Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element" class="action-link">
+      <a (click)="openDialog('Modifier',element)" style="cursor: pointer;">Edit</a> |
+      <a (click)="openDialog('Supprimer',element)" style="cursor: pointer;">Delete</a> |
+      <a (click)="onSubmit()" style="cursor: pointer;">Visualiser</a> |
+      <!--<a (click)="onValide(element)" style="cursor: pointer;">Envoyer</a>-->
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>-->
+
+

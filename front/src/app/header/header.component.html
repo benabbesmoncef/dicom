@@ -1,0 +1,15 @@
+<!-- Toolbar -->
+<mat-toolbar color="primary" class="app-header">
+
+  <div>
+    <a (click)="goToHome()" style="cursor: pointer;" target="_blank" class="positron">Keeplyna</a>
+    <!--<div *ngIf="isLoggedIn">{{ email }}</div>-->
+  </div>
+<!--<div *ngIf="!isLoggedIn"  *ngIf="isLoggedIn"></div>-->
+  <span class="nav-tool-items">
+    <a mat-button mat-raised-button (click)="goToLogin()" style="color: black" *ngIf="!isLoggedIn">Login</a>
+    <a mat-button mat-raised-button (click)="goToRegister()"  style="color: black" *ngIf="!isLoggedIn">Register</a>
+    <a mat-button mat-raised-button  (click)="logout()" style="color: black" *ngIf="isLoggedIn">Logout</a>
+  </span>
+
+</mat-toolbar>
